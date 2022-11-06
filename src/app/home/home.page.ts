@@ -13,8 +13,7 @@ export class HomePage {
     this.productos=this.productservice.getProducts();
   }
 
-  public addProductById(id: number){
+  public addProductById(id: string){
     this.procuctosEnCarrito.push(this.productservice.getProductById(id));
-    console.log(this.procuctosEnCarrito);
   }
 }

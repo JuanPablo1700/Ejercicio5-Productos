@@ -13,7 +13,16 @@ const routes: Routes = [
   },
   {
     path: 'view-product',
-    loadChildren: () => import('./view-product/view-product.module').then( m => m.ViewProductPageModule)
+    children: [
+      {
+        path:":id",
+        loadChildren: () => import('./view-product/view-product.module').then( m => m.ViewProductPageModule)
+      }
+    ]
+  },
+  {
+    path: 'agregar-producto',
+    loadChildren: () => import('./agregar-producto/agregar-producto.module').then( m => m.AgregarProductoPageModule)
   },
 ];
 

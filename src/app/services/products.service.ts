@@ -11,19 +11,19 @@ export class ProductsService {
 
     this.productos=[
       {
-        id:1,
+        id:"1",
         img:"https://picsum.photos/id/684/600/400",
         name:"Galletas",
         price:15
       },
       {
-        id:2,
+        id:"2",
         img:"https://picsum.photos/id/685/600/400",
         name:"Refresco",
         price:22
       },
       {
-        id:3,
+        id:"3",
         img:"https://picsum.photos/id/686/600/400",
         name:"Papas",
         price:15
@@ -34,7 +34,7 @@ export class ProductsService {
     return this.productos;
    }
 
-    public getProductById(id: number) : Producto {
+    public getProductById(id: String) : Producto {
       return {
         ...this.productos.find(producto => {
         return producto.id === id;
@@ -42,4 +42,7 @@ export class ProductsService {
       }
     }
    
+    public addProduct(newProduct: Producto){
+      this.productos.push(newProduct);
+    }
 }
