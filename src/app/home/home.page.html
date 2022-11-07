@@ -15,8 +15,10 @@
         </ion-avatar>
         <ion-label class="ion-margin">
           {{item.name}}
-          {{item.price}}
         </ion-label>
+        <ion-chip color="primary" mode="ios" outline="true">
+          <ion-label>${{item.price}}</ion-label>
+        </ion-chip> 
       </div>
       <ion-icon slot="end" name="cart" (click)="addProductById(item.id)"></ion-icon>
     </ion-item>
@@ -26,7 +28,7 @@
       <ion-icon name="chevron-up-circle"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button>
+      <ion-fab-button [routerLink]="['/view-cart']">
         <ion-icon name="cart"></ion-icon>
       </ion-fab-button>
       <ion-fab-button [routerLink]="['/agregar-producto']">

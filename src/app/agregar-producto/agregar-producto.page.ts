@@ -18,7 +18,8 @@ export class AgregarProductoPage implements OnInit {
       id: "",
       img:"",
       name: "",
-      price: 0
+      price: 0,
+      amount: 0
     }
   }
 
@@ -30,7 +31,8 @@ export class AgregarProductoPage implements OnInit {
       id: "",
       img:"",
       name: "",
-      price: 0
+      price: 0,
+      amount: 0
     }
   }
 

@@ -3,4 +3,5 @@ export class Producto {
     img: string;
     name: string;
     price: number;
+    amount: number;
 }
