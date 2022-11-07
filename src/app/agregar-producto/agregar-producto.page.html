@@ -8,5 +8,19 @@
 </ion-header>
 
 <ion-content>
-  <ion-input [(ngModel)]="producto.name"></ion-input>
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input [(ngModel)]="producto.name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">URL de la imagen</ion-label>
+    <ion-input [(ngModel)]="producto.img"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Precio</ion-label>
+    <ion-input [(ngModel)]="producto.price"></ion-input>
+  </ion-item>
+  <ion-button class="ion-margin" (click)="addProduct()" expand="block" fill="clear" shape="round">
+    Agregar Producto
+  </ion-button>
 </ion-content>

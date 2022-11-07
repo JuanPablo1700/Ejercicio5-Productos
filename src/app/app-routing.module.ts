@@ -24,6 +24,10 @@ const routes: Routes = [
     path: 'agregar-producto',
     loadChildren: () => import('./agregar-producto/agregar-producto.module').then( m => m.AgregarProductoPageModule)
   },
+  {
+    path: 'view-cart',
+    loadChildren: () => import('./view-cart/view-cart.module').then( m => m.ViewCartPageModule)
+  },
 ];
 
 @NgModule({

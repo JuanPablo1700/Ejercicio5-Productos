@@ -24,6 +24,14 @@ export class AgregarProductoPage implements OnInit {
 
   ngOnInit() {}
 
-  
+  public addProduct() {
+    this.productsService.addProduct(this.producto);
+    this.producto = {
+      id: "",
+      img:"",
+      name: "",
+      price: 0
+    }
+  }
 
 }
