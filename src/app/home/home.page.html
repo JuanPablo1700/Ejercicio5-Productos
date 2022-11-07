@@ -20,7 +20,8 @@
           <ion-label>${{item.price}}</ion-label>
         </ion-chip> 
       </div>
-      <ion-icon slot="end" name="cart" (click)="addProductById(item.id)"></ion-icon>
+      <ion-button slot="end" (click)="addProductById(item.id)"> <ion-icon name="cart"></ion-icon>
+       </ion-button>
     </ion-item>
   </ion-list>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">

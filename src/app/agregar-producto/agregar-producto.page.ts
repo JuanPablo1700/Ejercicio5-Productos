@@ -1,6 +1,13 @@
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable @typescript-eslint/semi */
 import { ProductsService } from './../services/products.service';
 import { Producto } from './../model/producto';
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
+import { PRIMARY_OUTLET } from '@angular/router';
+
+//import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-agregar-producto',
@@ -11,8 +18,9 @@ export class AgregarProductoPage implements OnInit {
 
   public producto: Producto
 
+
   constructor(
-    private productsService: ProductsService
+    private productsService: ProductsService,private alertController: AlertController, private toastController: ToastController
   ) {
     this.producto = {
       id: "",
@@ -21,19 +29,68 @@ export class AgregarProductoPage implements OnInit {
       price: 0,
       amount: 0
     }
+
   }
 
   ngOnInit() {}
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Guardado',
+      subHeader: 'Aviso: ',
+      message: 'Se guardo correctamente!',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+  async presentAlertError() {
+    const alert = await this.alertController.create({
+      header: 'Alerta',
+      subHeader: 'Aviso: ',
+      message: 'NO se guardo, ingrese todos los campos!',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+    async presentToast(position: 'top' | 'middle' | 'bottom') {
+    const toast = await this.toastController.create({
+      message: 'GUARDADO CORRECTAMENTE!',
+      duration: 1500,
+      position,
+      color:'success'
+    });
+
+    await toast.present();
+  }
 
   public addProduct() {
-    this.productsService.addProduct(this.producto);
-    this.producto = {
-      id: "",
-      img:"",
-      name: "",
-      price: 0,
-      amount: 0
+    if(this.producto.name!==''&&this.producto.img!==''&&this.producto.price!==0){
+      this.productsService.addProduct(this.producto);
+
+      this.producto = {
+        id: "",
+        img:"",
+        name:"",
+        price: 0,
+        amount: 0
+      }
+      //this.presentAlert();
+      this.presentToast("top")
+
+    }else{
+      this.presentAlertError()
     }
+
+
   }
+/*
+   produc = new FormGroup({
+    img: new FormControl('', [Validators.required]),
+    name:  new FormControl('', [Validators.required]),
+    price: new FormControl('', [Validators.required]),
+  });*/
+
 
 }
