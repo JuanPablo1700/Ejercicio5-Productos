@@ -8,12 +8,13 @@ import { ProductsService } from '../services/products.service';
 })
 export class HomePage {
   public productos:Producto[];
-  public procuctosEnCarrito:Producto[]=[];
+  public productosEnCarrito:Producto[]=[];
   constructor(private productservice:ProductsService) {
     this.productos=this.productservice.getProducts();
   }
 
   public addProductById(id: string){
-    this.procuctosEnCarrito.push(this.productservice.getProductById(id));
+    this.productosEnCarrito.push(this.productservice.getProductById(id));
+    this.productservice.setCartProducts(this.productosEnCarrito);
   }
 }

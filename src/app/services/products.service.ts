@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/quotes */
-/* eslint-disable @typescript-eslint/semi */
-/* eslint-disable prefer-const */
-/* eslint-disable arrow-body-style */
-/* eslint-disable @typescript-eslint/ban-types */
 import { Injectable } from '@angular/core';
 import { Producto } from '../model/producto';
 @Injectable({
@@ -11,6 +6,7 @@ import { Producto } from '../model/producto';
 export class ProductsService {
 
   private productos: Producto[];
+  private cartProducts: Producto[];
 
   constructor() {
 
@@ -44,14 +40,26 @@ export class ProductsService {
 
     public getProductById(id: String): Producto {
       let item: Producto;
-      item = this.productos.find( producto =>{
+      item = this.productos.find(producto => {
         return producto.id===id;
       })
       item.amount = item.amount + 1;
       return item;
     }
+
     public addProduct(newProduct: Producto){
       this.productos.push(newProduct);
     }
 
+    public removeProductFromCart(id: string) {
+      this.cartProducts.splice(parseInt(id),1);
+    }
+
+    public setCartProducts(products: Producto[]) {
+      this.cartProducts = products;
+    }
+
+    public getCartProducts(): Producto[] {
+      return this.cartProducts;
+    }
 }
