@@ -67,8 +67,8 @@ export class AgregarProductoPage implements OnInit {
 
   public addProduct() {
     if(this.producto.name!==''&&this.producto.img!==''&&this.producto.price!==0){
+      
       this.productsService.addProduct(this.producto);
-
       this.producto = {
         id: "",
         img:"",

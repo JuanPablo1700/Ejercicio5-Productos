@@ -1,3 +1,8 @@
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable @typescript-eslint/semi */
+/* eslint-disable prefer-const */
+/* eslint-disable arrow-body-style */
+/* eslint-disable @typescript-eslint/ban-types */
 import { Injectable } from '@angular/core';
 import { Producto } from '../model/producto';
 @Injectable({
@@ -37,16 +42,16 @@ export class ProductsService {
     return this.productos;
    }
 
-    public getProductById(id: String) : Producto {
-      return {
-        ...this.productos.find(producto => {
-          producto.amount = producto.amount + 1;
-        return producto.id === id;
-        })
-      }
+    public getProductById(id: String): Producto {
+      let item: Producto;
+      item = this.productos.find( producto =>{
+        return producto.id===id;
+      })
+      item.amount = item.amount + 1;
+      return item;
     }
-   
     public addProduct(newProduct: Producto){
       this.productos.push(newProduct);
     }
+
 }
