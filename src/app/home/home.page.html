@@ -9,7 +9,7 @@
 <ion-content [fullscreen]="true">
   <ion-list>
     <ion-item *ngFor="let item of productos; let i = index;">
-      <div style="display: flex;" class="ion-padding" [routerLink]="['/view-product', item.id]">
+      <div style="display: flex;" class="ion-padding" (click)="getProductById(item.id)">
         <ion-avatar>
           <img [src]="item.img"/>
         </ion-avatar>
@@ -20,7 +20,7 @@
           <ion-label>${{item.price}}</ion-label>
         </ion-chip> 
       </div>
-      <ion-button slot="end" (click)="addProductById(item.id)"> <ion-icon name="cart"></ion-icon>
+      <ion-button slot="end" (click)="addProductToCart(item.id, item)"> <ion-icon name="cart"></ion-icon>
        </ion-button>
     </ion-item>
   </ion-list>

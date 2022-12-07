@@ -1,3 +1,4 @@
+import { Cart } from './../model/cart';
 import { ProductsService } from './../services/products.service';
 import { Producto } from './../model/producto';
 import { Component, OnInit } from '@angular/core';
@@ -9,32 +10,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewCartPage implements OnInit {
 
-  productList: Producto[];
+  cartList: Cart[];
 
   total: number;
 
   constructor(
     private productsService: ProductsService
   ) {
+    this.cartList = []
     this.total = 0;
   }
 
   ngOnInit() {
-    this.productList = this.productsService.getCartProducts();
-    for (let index = 0; index < this.productList.length; index++) {
-      let price = this.productList[index].price;
-      let amount = this.productList[index].amount;
+    this.productsService.getCarts().subscribe(res => {
+      this.cartList = res;
+    });
+  }
+  public refresh(){
+    this.total = 0;
+    for (let index = 0; index < this.cartList.length; index++) {
+      let price = this.cartList[index].price;
+      let amount = this.cartList[index].amount;
       this.total += price * amount;
     }
   }
+
   public removeProductFromCart(id: string){
     this.productsService.removeProductFromCart(id);
-    this.productList = this.productsService.getCartProducts();
-    this.total = 0;
-    for (let index = 0; index < this.productList.length; index++) {
-      let price = this.productList[index].price;
-      let amount = this.productList[index].amount;
-      this.total += price * amount;
-    }
   }
 }

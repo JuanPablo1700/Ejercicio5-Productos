@@ -1,4 +1,6 @@
+import { Cart } from './../model/cart';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Producto } from '../model/producto';
 import { ProductsService } from '../services/products.service';
 @Component({
@@ -9,12 +11,36 @@ import { ProductsService } from '../services/products.service';
 export class HomePage {
   public productos:Producto[];
   public productosEnCarrito:Producto[]=[];
-  constructor(private productservice:ProductsService) {
-    this.productos=this.productservice.getProducts();
+  public cart: Cart;
+
+  constructor(
+    private productservice:ProductsService,
+    private router: Router
+  ) {
+    this.cart = {
+      product_id: "",
+      name: "",
+      price: 0,
+      img: "",
+      amount: 0
+    }
+    
+    this.productservice.getProducts().subscribe(res => {
+      this.productos = res;
+    });
   }
 
-  public addProductById(id: string){
-    this.productosEnCarrito.push(this.productservice.getProductById(id));
-    this.productservice.setCartProducts(this.productosEnCarrito);
+  public getProductById(id: string){
+    this.router.navigate(['/view-product'], {
+      queryParams: { id: id },
+    });
+  }
+
+  public addProductToCart(id: string, product: Producto){
+    this.cart.product_id = id;
+    this.cart.name = product.name;
+    this.cart.price = product.price;
+    this.cart.img = product.img;
+    this.productservice.addCart(this.cart);
   }
 }

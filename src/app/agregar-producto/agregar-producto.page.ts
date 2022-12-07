@@ -1,11 +1,8 @@
-/* eslint-disable @typescript-eslint/quotes */
-/* eslint-disable @typescript-eslint/semi */
 import { ProductsService } from './../services/products.service';
 import { Producto } from './../model/producto';
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
-import { PRIMARY_OUTLET } from '@angular/router';
 
 //import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -23,16 +20,15 @@ export class AgregarProductoPage implements OnInit {
     private productsService: ProductsService,private alertController: AlertController, private toastController: ToastController
   ) {
     this.producto = {
-      id: "",
       img:"",
       name: "",
-      price: 0,
-      amount: 0
+      price: 0
     }
 
   }
 
   ngOnInit() {}
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Guardado',
@@ -43,6 +39,7 @@ export class AgregarProductoPage implements OnInit {
 
     await alert.present();
   }
+
   async presentAlertError() {
     const alert = await this.alertController.create({
       header: 'Alerta',
@@ -70,11 +67,9 @@ export class AgregarProductoPage implements OnInit {
       
       this.productsService.addProduct(this.producto);
       this.producto = {
-        id: "",
-        img:"",
         name:"",
         price: 0,
-        amount: 0
+        img:""
       }
       //this.presentAlert();
       this.presentToast("top")
@@ -82,15 +77,5 @@ export class AgregarProductoPage implements OnInit {
     }else{
       this.presentAlertError()
     }
-
-
   }
-/*
-   produc = new FormGroup({
-    img: new FormControl('', [Validators.required]),
-    name:  new FormControl('', [Validators.required]),
-    price: new FormControl('', [Validators.required]),
-  });*/
-
-
 }
